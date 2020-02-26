@@ -9,6 +9,16 @@ import ezdxf
 from six.moves import range
 
 
+def endlessStringByN(origStr, n):
+    assert n > 0
+    s = ''
+    while True:
+        if len(s) < n:
+            s += origStr
+        yield s[:n]
+        s = s[n:]
+
+
 def createDXF(drawFn, fileName, *args):
     doc = ezdxf.new(dxfversion='R2018', setup=True)
 
@@ -27,7 +37,7 @@ def createDXF(drawFn, fileName, *args):
 def soylentGreen(msp, xNum, yNum, xWidth, yWidth):
     lineAttribs = {'color': 7}
     #textAttribs = {'layer': 'TEXTLAYER'}
-    textAttribs = {'color': 7, 'height': 15}
+    textAttribs = {'color': 7, 'height': 5}
 
     xSize = xNum * xWidth
     ySize = yNum * yWidth
@@ -42,11 +52,13 @@ def soylentGreen(msp, xNum, yNum, xWidth, yWidth):
         y = y * yWidth
         msp.add_line((0, y), (ySize, y), dxfattribs=lineAttribs)
 
+    letters = endlessStringByN("soylentgreen", 2)
     for x in range(xNum):
         for y in range(yNum):
             xPos = (x + 0.5) * xWidth
             yPos = (y + 0.5) * yWidth
-            msp.add_text('A', dxfattribs=textAttribs).set_pos((xPos, yPos), align='MIDDLE_CENTER')
+            msp.add_text(letters.__next__(), dxfattribs=textAttribs).set_pos(
+                (xPos, yPos), align='MIDDLE_CENTER')
 
 
 createDXF(soylentGreen, 'soylent-green.dxf', 10, 10, 20, 20)

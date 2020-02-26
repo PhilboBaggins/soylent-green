@@ -9,6 +9,16 @@ import svgwrite
 from six.moves import range
 
 
+def endlessStringByN(origStr, n):
+    assert n > 0
+    s = ''
+    while True:
+        if len(s) < n:
+            s += origStr
+        yield s[:n]
+        s = s[n:]
+
+
 def createDXF(drawFn, fileName, *args):
     dwg = svgwrite.Drawing(fileName, profile='tiny')
     drawFn(dwg, *args)
@@ -33,12 +43,13 @@ def soylentGreen(dwg, xNum, yNum, xWidth, yWidth):
         y = y * yWidth
         dwg.add(dwg.line((0, y), (ySize, y), **lineKwArgs))
 
+    letters = endlessStringByN("soylentgreen", 2)
     for x in range(xNum):
         for y in range(yNum):
             xPos = (x + 0.5) * xWidth
             yPos = (y + 0.5) * yWidth
             # TODO: Make text centered
-            dwg.add(dwg.text('A', insert=(xPos, yPos), fill='red'))
+            dwg.add(dwg.text(letters.__next__(), insert=(xPos, yPos), fill='red'))
 
 
 createDXF(soylentGreen, 'soylent-green.svg', 10, 10, 20, 20)
