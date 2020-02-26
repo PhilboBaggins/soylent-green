@@ -25,10 +25,6 @@ def soylentGreen(dwg, xNum, yNum, xWidth, yWidth):
 
     print('Total size is', xSize, 'mm x', ySize, 'mm')
 
-    for x in dir(dwg):
-        if 'unit' in x:
-            print(x)
-
     for x in range(xNum + 1):
         x = x * xWidth
         dwg.add(dwg.line((x, 0), (x, xSize), **lineKwArgs))
