@@ -22,7 +22,7 @@ def endlessStringByN(origStr, n):
 def createDXF(drawFn, fileName, *args):
     dwg = svgwrite.Drawing(fileName, profile='tiny')
     drawFn(dwg, *args)
-    dwg.save()
+    dwg.save(pretty=True)
 
 
 def soylentGreen(dwg, xNum, yNum, xWidth, yWidth):
