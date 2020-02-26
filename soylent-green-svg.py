@@ -41,7 +41,8 @@ def soylentGreen(dwg, xNum, yNum, xWidth, yWidth):
         for y in range(yNum):
             xPos = (x + 0.5) * xWidth
             yPos = (y + 0.5) * yWidth
-            dwg.add(dwg.text('A', insert=(0, 0.2), fill='red'))
+            # TODO: Make text centered
+            dwg.add(dwg.text('A', insert=(xPos, yPos), fill='red'))
 
 
 createDXF(soylentGreen, 'soylent-green.svg', 10, 10, 20, 20)
