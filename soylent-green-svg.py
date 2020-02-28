@@ -27,7 +27,7 @@ def createDXF(drawFn, fileName, *args):
 
 def soylentGreen(dwg, xNum, yNum, xWidth, yWidth):
     lineKwArgs = {
-        'stroke' : svgwrite.rgb(10, 10, 16, '%')
+        'stroke' : svgwrite.rgb(100, 100, 100, '%')
     }
 
     xSize = xNum * xWidth
