@@ -19,7 +19,7 @@ def endlessStringByN(origStr, n):
         s = s[n:]
 
 
-def createDXF(drawFn, fileName, *args):
+def createSVG(drawFn, fileName, *args):
     dwg = svgwrite.Drawing(fileName, profile='tiny')
     drawFn(dwg, *args)
     dwg.save(pretty=True)
@@ -52,4 +52,4 @@ def soylentGreen(dwg, xNum, yNum, xWidth, yWidth):
             dwg.add(dwg.text(letters.__next__(), insert=(xPos, yPos), fill='red'))
 
 
-createDXF(soylentGreen, 'soylent-green.svg', 10, 10, 20, 20)
+createSVG(soylentGreen, 'soylent-green.svg', 10, 10, 20, 20)
