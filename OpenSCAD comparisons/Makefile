@@ -7,10 +7,13 @@ SOURCES := \
 
 ALL_OUTPUTS := \
 	${NAME}1.dxf \
+	${NAME}1.png \
 	${NAME}1.svg \
 	${NAME}2.dxf \
+	${NAME}2.png \
 	${NAME}2.svg \
 	${NAME}3.dxf \
+	${NAME}3.png \
 	${NAME}3.svg \
 
 .PHONY: all clean
@@ -18,6 +21,9 @@ ALL_OUTPUTS := \
 all: ${ALL_OUTPUTS}
 
 %.dxf: %.scad
+	openscad -o $@ $<
+
+%.png: %.scad
 	openscad -o $@ $<
 
 %.svg: %.scad
